@@ -1,11 +1,19 @@
-import { useContext } from "react";
+import { ChangeEvent, useContext } from "react";
 import OrgContext from "../../../comps/context/OrgContext";
 import UserContext from "../../../comps/context/UserContext";
 
 import AdminMember from "../../../comps/pages/orgs/admin/AdminMember";
-import { Box, Typography } from "@mui/material";
+import {
+    Box,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select,
+    Typography,
+} from "@mui/material";
 
 import { sortByRole } from "../../../utils/DataFormatters";
+import { info } from "console";
 
 const Members = () => {
     const user = useContext(UserContext);
@@ -25,7 +33,6 @@ const Members = () => {
                 is_faculty: member.users?.is_faculty,
             };
         });
-
     const userMember = organization.memberships.find(
         (member) => member.users?.id === user.id,
     );
@@ -33,8 +40,9 @@ const Members = () => {
     return (
         <Box sx={{ width: "100%" }}>
             <Typography variant="h1" align="center" width="100%">
-                Manage Members
+                Manage Member
             </Typography>
+
             {members
                 ?.sort(sortByRole)
                 .map((member, i) => (
